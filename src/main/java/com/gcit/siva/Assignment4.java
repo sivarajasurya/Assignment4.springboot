@@ -10,17 +10,12 @@ public class Assignment4 {
     static ObjectMapper objectMapper = new ObjectMapper();
     static Map<String,String> file = new HashMap<>();
 
-   public Assignment4(String fileName) throws IOException {
-        File jsonFile = new File(fileName);
+   public Assignment4() throws IOException {
+        File jsonFile = new File(".\\jason\\countries.json");
         List<Country> countries = objectMapper.readValue(jsonFile, new TypeReference<>(){});
         countries.forEach(obj1 -> map(obj1.getName(), obj1.getCode()));
     }
 
-//    public static void main(String[] args) throws IOException {
-//        Assignment4 obj = new Assignment4();
-//        System.out.println(obj.usingCountryCode("In"));
-//
-//    }
     public void map(String name, String code){
         file.put(name.toUpperCase(),code.toUpperCase());
     }
@@ -31,7 +26,6 @@ public class Assignment4 {
             return "Invalid input";
         }else
             return a;
-
     }
 
     public String  usingCountryCode(String code){
@@ -40,7 +34,6 @@ public class Assignment4 {
            return "Invalid input" ;
         }else
             return a;
-
     }
     public <K, V> K getKey(Map<K, V> map, V value)
     {
