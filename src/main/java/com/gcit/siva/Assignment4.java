@@ -7,22 +7,25 @@ import java.io.IOException;
 import java.util.*;
 
 public class Assignment4 {
-    static Scanner get = new Scanner(System.in);
     static ObjectMapper objectMapper = new ObjectMapper();
     static Map<String,String> file = new HashMap<>();
-    public static void main(String[] args) throws IOException {
-        File jsonFile = new File(".\\jason\\countries.json");
+
+   public Assignment4(String fileName) throws IOException {
+        File jsonFile = new File(fileName);
         List<Country> countries = objectMapper.readValue(jsonFile, new TypeReference<>(){});
         countries.forEach(obj1 -> map(obj1.getName(), obj1.getCode()));
-
     }
 
-
-    public static void map(String name, String code){
+//    public static void main(String[] args) throws IOException {
+//        Assignment4 obj = new Assignment4();
+//        System.out.println(obj.usingCountryCode("In"));
+//
+//    }
+    public void map(String name, String code){
         file.put(name.toUpperCase(),code.toUpperCase());
     }
 
-    public static String usingCountryName(String name){
+    public String usingCountryName(String name){
         String a = file.get(name.toUpperCase());
         if (a == null){
             return "Invalid input";
@@ -31,7 +34,7 @@ public class Assignment4 {
 
     }
 
-    public static String  usingCountryCode(String code){
+    public String  usingCountryCode(String code){
         String a = getKey(file, code.toUpperCase());
         if (a == null){
            return "Invalid input" ;
@@ -39,7 +42,7 @@ public class Assignment4 {
             return a;
 
     }
-    public static <K, V> K getKey(Map<K, V> map, V value)
+    public <K, V> K getKey(Map<K, V> map, V value)
     {
         for (Map.Entry<K, V> entry: map.entrySet())
         {
